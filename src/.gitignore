@@ -1,0 +1,13 @@
+# dependencies
+node_modules
+
+# env files
+.env #env that is shared accross diff environments/devices, shouldnt contain sensitive keys
+.env.local #.env that is specific to your local environment which contains sensitive keys and should not be shared
+
+# build output
+dist
+
+# editor/OS
+.vscode
+.DS_Store

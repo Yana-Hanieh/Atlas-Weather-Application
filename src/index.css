@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0f2239 ; 
+  --color-primary-light: #142d4c;
+  --color-primary-hover: #1e3a5f;
+  --color-hover: ; 
+}
+
+/* Hides the scroll bar used in the hours card*/
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
