@@ -1,12 +1,20 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import {  GoSidebarExpand, GoSidebarCollapse } from "react-icons/go";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { FaCity,FaMap } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
 import { useState} from "react";
+import Weather from "../pages/Weather";
+import Cities from "../pages/Cities";
+import Map from "../pages/Map";
+import Settings from "../pages/Settings";
+
 
 function SideBar() {
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const [iscollapsed, setIsCollapsed] = useState(false); //usestate used to to switch boolean value => allowing user to collapse and expand the sidebar, initially set to false since the sidebar is initially expanded
+  
   if (iscollapsed) { //if the iscollapsed is true this return function will be executed
     return ( //return clause if the sidebar is collapsed (iscollapsed=true), only the icons will show
       <div className="bg-primary-light rounded-xl text-white w-16 sm:w-20 flex flex-col gap-5 items-center">
@@ -34,13 +42,21 @@ function SideBar() {
      
       <div className="flex flex-col gap-4 font-semibold items-center text-gray-200" > {/*the elements of the sidebar (icons + labels)*/ }
         <TiWeatherPartlySunny className="text-4xl" />
-        <button className="hidden sm:block hover:text-yellow-100 cursor-pointer "> Weather</button>
+        <button 
+          onClick = {()=> navigate(`/weather`)}
+          className="hidden sm:block hover:text-hover cursor-pointer "> Weather</button>
         <FaCity className="text-4xl"/>
-        <button className="hidden sm:block hover:text-yellow-100 cursor-pointer">Cities</button>
+        <button 
+          onClick = {()=> navigate(`/cities`)}
+          className="hidden sm:block hover:text-hover cursor-pointer">Cities</button>
         <FaMap className="text-4xl"/>
-        <button className="hidden sm:block hover:text-yellow-100 cursor-pointer">Map</button>
+        <button 
+          onClick = {()=> navigate(`/map`)}
+          className="hidden sm:block hover:text-hover cursor-pointer">Map</button>
         <IoSettings className="text-4xl text-gray-300"/>
-        <button className="hidden sm:block hover:text-yellow-100 cursor-pointer">Settings</button>
+        <button 
+          onClick = {()=> navigate(`/settings`)}
+          className="hidden sm:block hover:text-hover cursor-pointer">Settings</button>
       </div>
     </div>
   );
