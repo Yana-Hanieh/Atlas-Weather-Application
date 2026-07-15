@@ -74,8 +74,9 @@ function Weather() {
       return; //no data available => wait for data to fetch
     
     const params = new URLSearchParams(window.location.search) //read the current URL's query string
+ 
     params.set("city", weatherData.name); //add the city key from the api into the URL
-
+    
     window.history.pushState({},"",`?${params.toString()}`); //update the browser's address without reloading the page
 
   }, [weatherData]); //runs whenever weatherData changes (new search or geolocation)
@@ -92,8 +93,7 @@ function Weather() {
   };
 
   return (
-    <div className="bg-primary flex flex-row gap-3 p-4 items-stretch min-h-screen w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
-      <SideBar/>
+    <div className=" bg-primary flex flex-row gap-3 px-4 pb-4 items-stretch min-h-screen w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
       <div className="flex flex-col lg:flex-row gap-3 flex-1 min-w-0 items-stretch">
         <div className="flex flex-col gap-5 flex-1 min-w-0">
         <SearchBar 
