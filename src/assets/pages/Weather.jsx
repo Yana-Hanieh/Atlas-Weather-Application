@@ -79,7 +79,7 @@ function Weather() {
     
     window.history.pushState({},"",`?${params.toString()}`); //update the browser's address without reloading the page
 
-  }, [weatherData]); //runs whenever weatherData changes (new search or geolocation)
+   }, [weatherData]); //runs whenever weatherData changes (new search or geolocation)
 
   const handleSearch = async(cityName) => { //an event handler that gets called by the SearchBar when the user submits a search, it only handles the coordinates
     try{

@@ -15,7 +15,7 @@ export async function getWeatherByCoords(lat, lon, signal){ //signal: optional A
 }
 
 //for the search bar
-export async function getCoordsByCity(cityName){ //converts the city/country name into coordinates 
+export async function getCoordsByCity(cityName){ //converts the city/country name into coordinates (lat and lon)
     const response = await fetch( //calls the geocoding endpoint and returns a Response object
         `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(cityName)}&limit=1&appid=${API_KEY}` //API call for the geocoding API, encodeURIcomponent is a builtin function that allows the spaces, and special characters (spaces, accents,etc.) between names (new york, los angleles), the limit shows the maximum numb of matching results, set to 1 to get the 1 "best" result
     )
