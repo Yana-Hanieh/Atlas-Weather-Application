@@ -8,7 +8,7 @@ function SearchBar({onSearch}) { //uses the onSearch function from App.jsx file 
     if(input.trim() === "") //trim() removes all whitespaces, if the result is an empty string only the input is ignored => doesnt invoke any data fetching
       return;
     onSearch (input); //use the typed input in the onSearch function 
-    setInput(""); //clear the input after submitting
+    setInput(""); //clears the input after submitting, so the user doesnt have to manually backspace/delete entered city
   };
     return (
       <>

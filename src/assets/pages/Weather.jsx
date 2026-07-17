@@ -3,7 +3,7 @@ import SearchBar from '../components/SearchBar.jsx'
 import DisplayCard from '../components/DisplayCard.jsx'
 import WeekCard from '../components/WeekCard.jsx'
 import { useState, useEffect } from "react"
-import {getWeatherByCoords,getCoordsByCity, getForecastByCoords} from '../../api/weather.js'
+import {getWeatherByCoords,getCoordsByCity, getForecastByCoords} from '../../api/weatherApi.js'
 
 const defaultLocation = {lat:51.5073219, lon:-0.1276474}; //a default location object if user denies access or problems encountered
 
@@ -56,7 +56,8 @@ function Weather() {
       getForecastByCoords(location.lat,location.lon) //calls the getForecastByCoords function from the weather.js file, passing the location's (user or default) lat and lon
     ])
       .then(([weather,forecast]) =>{ //promise method that takes data if its fullfilled, and leaves it empty if its rejected 
-        setWeatherData(weather); //save the fetched data into state
+        //save the fetched data into state
+        setWeatherData(weather); 
         setForecastData(forecast)
       })
       .catch ((err) => { //promise method runs only if the promise fails/rejectcalls .then() internally, doesnt pass the fulfillment handler, only runs if the error gets passed as the argument
@@ -74,11 +75,8 @@ function Weather() {
       return; //no data available => wait for data to fetch
     
     const params = new URLSearchParams(window.location.search) //read the current URL's query string
- 
     params.set("city", weatherData.name); //add the city key from the api into the URL
-    
     window.history.pushState({},"",`?${params.toString()}`); //update the browser's address without reloading the page
-
    }, [weatherData]); //runs whenever weatherData changes (new search or geolocation)
 
   const handleSearch = async(cityName) => { //an event handler that gets called by the SearchBar when the user submits a search, it only handles the coordinates
@@ -109,7 +107,6 @@ function Weather() {
           error={error} 
         /> 
         
-
       </div>
       <div className="w-full lg:w-80 shrink-0 lg:mt-13">
             <WeekCard forecastData={forecastData}/> {/* use the WeekCard hook as a third card containing the weekly weather data (displayed on the rightside of the screen) */}

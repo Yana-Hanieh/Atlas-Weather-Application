@@ -8,20 +8,20 @@ import AirConditionsCard from "./AirConditionsCard.jsx";
 import WeekCard from "./WeekCard.jsx";
 
 
-function LocationIcon({icon}){ //A function which takes the icon as a prop/variable from the LocationData to display the weather icon based on its condition
-   if (icon === "Clouds")
+function WeatherIcon({weather}){ //A function which takes the icon as a prop/variable from the LocationData to display the weather icon based on its condition
+   if (weather === "Clouds")
         return <TiWeatherCloudy className="text-slate-300 text-[5rem] sm:text-[10rem] "/>;
-    if (icon === "Clear") 
+    if (weather === "Clear") 
         return <SiAccuweather className="text-yellow-300 text-[5rem] sm:text-[10rem] transform transition duration-300 hover:rotate-360"/>;
-    if (icon === "Rain")
+    if (weather === "Rain")
         return <TiWeatherDownpour className="text-blue-400 text-[5rem] sm:text-[10rem] "/>
-    if (icon === "Drizzle")
+    if (weather === "Drizzle")
         return <RiDrizzleFill className="text-blue-300 text-[5rem] sm:text-[10rem]"/>
-    if (icon === "Thunderstorm")
+    if (weather === "Thunderstorm")
         return <IoThunderstorm className="text-blue-800 text-[5rem] sm:text-[10rem]"/>
-    if (icon === "Snow")
-        return <GiSnowing className="text-blue-200 text-[10rem] "/>
-    if (icon === "Mist")
+    if (weather === "Snow")
+        return <GiSnowing className="text-blue-200 text-[5rem] sm:text-[10rem]"/>
+    if (weather === "Mist")
         return <RiMistFill  className="text-blue-200 text-[5rem] sm:text-[10rem]"/>
 }
 
@@ -51,7 +51,7 @@ function DisplayCard({weatherData, forecastData, loading, error}){ //enter the l
                         </div>
                         <h1 className="font-bold text-gray-100 text-5xl">{Math.round(main.temp)}°C</h1>
                     </div>
-                    <LocationIcon icon={condition} />
+                    <WeatherIcon weather={condition} />
                 </div>
                 <div className="mt-5 flex flex-col gap-6">
                     <TodayCard forecastData={forecastData}/> {/*use the TodayCard hook as first card containing the current weather data */}

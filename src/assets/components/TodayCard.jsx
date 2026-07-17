@@ -4,7 +4,7 @@ import { SiAccuweather } from "react-icons/si";
 import { IoThunderstorm } from "react-icons/io5";
 import { GiSnowing } from "react-icons/gi";
 
-function Icon({weather}){ //A function which takes the weaher as a prop/variable from the LocationData to display the weather icon based on its condition
+function WeatherIcon({weather}){ //A function which takes the weaher as a prop/variable from the LocationData to display the weather icon based on its condition
     if (weather === "Clear") 
         return <SiAccuweather className="text-yellow-300 text-5xl"/>;
     if (weather === "Rain")
@@ -30,7 +30,7 @@ function TodayCard({forecastData}){
                     <div key={index} className="shrink-0 w-24 sm:w-32 text-center text-gray-200 text-sm sm:text-lg mt-4 border-r-2 border-gray-300"> {/*use map function to loop through HoursData file which contains the hrs,temp and icon*/}
                         <p className="text-xl">{Data.dt_txt.slice(11,16)}</p>  {/*slice is used to remove the date, providing only the time (00:00) of the day, */}
                         <p className="flex justify-center my-3">
-                            <Icon weather={Data.weather[0].main}/> {/*displays the weather of the first and only object in the array */}
+                            <WeatherIcon weather={Data.weather[0].main}/> {/*displays the weather of the first and only object in the array */}
                         </p>
                         <p className="text-xl">{Math.round(Data.main.temp)}°C</p> {/*rounds up the temp to remove decimals  */}
                     </div>
