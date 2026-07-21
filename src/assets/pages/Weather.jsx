@@ -1,4 +1,3 @@
-import SideBar from '../components/SideBar.jsx'
 import SearchBar from '../components/SearchBar.jsx'
 import DisplayCard from '../components/DisplayCard.jsx'
 import WeekCard from '../components/WeekCard.jsx'
@@ -91,9 +90,9 @@ function Weather() {
   };
 
   return (
-    <div className=" bg-primary flex flex-row gap-3 px-4 pb-4 items-stretch min-h-screen w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
+    <div className=" bg-primary flex flex-row gap-3 px-4 pb-4 items-stretch min-h-screen w-full overflow-y-auto hide-scrollbar"> {/* search bar and side bar are aligned from the top so they start in the same height */}
       <div className="flex flex-col lg:flex-row gap-3 flex-1 min-w-0 items-stretch">
-        <div className="flex flex-col gap-5 flex-1 min-w-0">
+        <div className="flex flex-col gap-5 flex-1 min-w-0 pt-4">
         <SearchBar 
           onSearch={handleSearch} //triggers the search logic without having the coords,states, or api
           input={searchInput} 
@@ -108,9 +107,15 @@ function Weather() {
         /> 
         
       </div>
-      <div className="w-full lg:w-80 shrink-0 lg:mt-13">
-            <WeekCard forecastData={forecastData}/> {/* use the WeekCard hook as a third card containing the weekly weather data (displayed on the rightside of the screen) */}
+      
+      <div className="flex flex-col">
+        <p className="h-12"></p>
+        <div className=" md:mt-16 w-full h-full lg:w-80 shrink-0 rounded-xl hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300">
+ 
+              <WeekCard forecastData={forecastData}/> {/* use the WeekCard hook as a third card containing the weekly weather data (displayed on the rightside of the screen) */}
+        </div>
       </div>
+
       </div>
     </div>
   );

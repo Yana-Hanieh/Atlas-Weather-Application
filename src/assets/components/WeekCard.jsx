@@ -6,17 +6,17 @@ import { GiSnowing } from "react-icons/gi";
 
 function WeekIcon({icon}){ //A function which takes the icon as a prop/variable from the LocationData to display the weather icon based on its condition
      if (icon === "Clear") 
-        return <SiAccuweather className="text-yellow-300 text-6xl"/>;
+        return <SiAccuweather className="text-yellow-300 text-4xl"/>;
     if (icon === "Rain")
-        return <TiWeatherDownpour className="text-blue-400 text-6xl"/>
+        return <TiWeatherDownpour className="text-blue-400 text-4xl"/>
     if (icon === "Drizzle")
-        return <RiDrizzleFill className="text-blue-300 text-6xl"/>
+        return <RiDrizzleFill className="text-blue-300 text-4xl"/>
     if (icon === "Thunderstorm")
-        return <IoThunderstorm className="text-blue-800 text-6xl"/>
+        return <IoThunderstorm className="text-blue-800 text-4xl"/>
     if (icon === "Snow")
-        return <GiSnowing className="text-blue-200 text-6xl"/>
+        return <GiSnowing className="text-blue-200 text-4xl"/>
     if (icon === "Mist")
-        return <RiMistFill  className="text-blue-200 text-6xl"/>
+        return <RiMistFill  className="text-blue-200 text-4xl"/>
    }
 
 function groupForecastByDay(forecastData){ //turns 40 3hr entries into 5 daily summaries
@@ -58,20 +58,20 @@ function WeekCard({forecastData}){
     const weekData = groupForecastByDay(forecastData); //actually calls the grouping function
 
     return(
-        <div className="bg-primary-light shadow-lg shadow-cyan-950 hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300  rounded-xl  h-full px-4 py-2">
-             <h2 className="font-medium text-white text-2xl mt-3">6 Day Forecast</h2>
-            <div className="flex flex-col">
+        <div className="flex flex-col bg-primary-light shadow-lg shadow-cyan-950 rounded-xl h-full p-5 justify-between w-full">
+            <h2 className="font-medium text-white text-2xl">6 Day Forecast</h2>
+            <div className="flex flex-col justify-between flex-1">
                 
-            {weekData.map((day,index) => (
-                <div key={index} className="text-sm sm:text-lg text-gray-200 font-medium flex flex-row items-center gap-2 py-4 border-b-2 border-gray-400 last:border-b-0">
-                    <p className="w-16 sm:w-24">{day.dayName}</p>
-                    <p className="w-10 sm:w-20 flex justify-center"><WeekIcon icon={day.condition} /></p>
-                    <p className="flex-1 text-xs sm:text-sm">{day.description}</p>
-                    <p className="w-14 sm:w-16 text-right text-xs sm:text-sm">{day.high}/{day.low}</p>
-                </div>
-                
-            ))}
-            
+                {weekData.map((day,index) => (
+                    <div key={index} 
+                        className="flex-1 text-sm sm:text-lg text-gray-200 font-medium flex flex-row items-center gap-2 py-4 border-b-2 border-gray-400 last:border-b-0 hide-scrollbar">
+                        <p title={day.dayName} className="truncate w-15">{day.dayName}</p>
+                        <p className="w-15 flex justify-center"><WeekIcon icon={day.condition} /></p>
+                        <p title={day.description} className="truncate w-15 text-xs sm:text-sm">{day.description}</p>
+                        <p className="w-15 text-right text-xs sm:text-sm">{day.high}/{day.low}</p>
+                    </div>
+                    
+                ))}
             </div>
         </div>
     )

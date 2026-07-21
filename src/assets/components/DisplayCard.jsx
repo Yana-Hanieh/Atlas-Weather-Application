@@ -27,7 +27,7 @@ function WeatherIcon({weather}){ //A function which takes the icon as a prop/var
 
 function DisplayCard({weatherData, forecastData, loading, error}){ //enter the location, tempreater, rain percentage, and corresponding icon for the weather
    if (loading){ //if its fetching the data show a message
-    return <p className="text-gray-100 text-2xl m-20">Loading Weather....</p>;
+    return <p className="text-gray-100 text-2xl m-20 ">Loading Weather....</p>;
    }
    if (error){ //if an error occurs show a warning
     return <p className="text-red-600 text-2xl m-20">{error}</p>;
@@ -41,22 +41,26 @@ function DisplayCard({weatherData, forecastData, loading, error}){ //enter the l
    const condition = weather[0].main; //a variable containing the main element found in the "weather" array  which helps choose the weather icon, NOTE: its the main element inside the weather array, 
    
     return(
-        <div className="flex flex-col lg:flex-row w-full"> {/*display the hooks/cards in the same row*/}
+        <div className="flex flex-col lg:flex-row w-full h-full"> {/*display the hooks/cards in the same row*/}
             <div className="flex flex-col gap-5 flex-1 min-w-0"> {/*display the hooks/cards in the same column*/}
-                <div className="flex flex-row justify-between ml-10 max-w-170 ">
-                    <div className="flex flex-col gap-12">
+                <div className="flex flex-row justify-between ml-10 max-w-230">
+                    <div className="flex flex-col gap-12 ">
                         <div>
-                            <h1 className="font-semibold text-gray-100 text-5xl">{name}</h1> 
-                            <p className="font-light text-gray-300 text-md mt-2 ml-1">{description}</p>
+                            <h1 className="font-semibold text-gray-100 text-5xl mt-4">{name}</h1> 
+                            <p className="font-light text-gray-300 text-md mt-2 ml-1 mb-8">{description}</p>
                         </div>
                         <h1 className="font-bold text-gray-100 text-5xl">{Math.round(main.temp)}°C</h1>
                     </div>
                     <WeatherIcon weather={condition} />
                 </div>
-                <div className="mt-5 flex flex-col gap-6">
-                    <TodayCard forecastData={forecastData}/> {/*use the TodayCard hook as first card containing the current weather data */}
-                    <AirConditionsCard weatherData={weatherData}/> {/*use the AirConditionsCard hook as a second card containing the air conditions data */}
+
+                <div className="mt-8 flex flex-col gap-10">
+                    <div className=" hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 rounded-xl">
+                        <TodayCard forecastData={forecastData}/> {/*use the TodayCard hook as first card containing the current weather data */}
+                    </div>
+                    <AirConditionsCard weatherData={weatherData}/> {/*use the AirConditionsCard hook as a second card containing the air con ditions data */}
                 </div>
+
             </div>
         </div>
     )

@@ -5,6 +5,8 @@ import { RiDrizzleFill,RiMistFill  } from "react-icons/ri";
 import { SiAccuweather } from "react-icons/si";
 import { IoThunderstorm } from "react-icons/io5";
 import { GiSnowing } from "react-icons/gi";
+import { ImCross } from "react-icons/im";
+import { RxCross1 } from "react-icons/rx";
 import TodayCard from "./TodayCard.jsx";
 import WeekCard from "./WeekCard.jsx";
 import { MdDescription } from "react-icons/md";
@@ -29,18 +31,22 @@ function WeatherIcon({weather}){ //A function which takes the icon as a prop/var
 function CityDetails({city,weatherData,forecastData,onClose}) {
     if (!weatherData)
         return <p className="text-gray-300">Loading Details...</p>;
+    if (!city){
+        return <div className="h-full w-full"></div>
+    }
    const {name,main,weather,clouds} = weatherData; //save the weather data into the 4 seperate variables to easily call
    const description = weather[0].description; //a variable containing the description element of the "weather" array, NOTE: its written separatly since its an element of a nested array => destructuring would'nt work
    const condition = weather[0].main; //a variable containing the main element found in the "weather" array  which helps choose the weather icon, NOTE: its the main element inside the weather array, 
    
     return(
-        <div className="bg-primary-light shadow-lg shadow-cyan-950 hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 rounded-xl h-full p-4 overflow-hidden">
-            <button 
-                onClick={onClose}
-                className="font-medium rounded-2xl w-15 border-primary text-primary bg-hover hover:bg-primary hover:text-gray-300 cursor-pointer float-right">
-                close
-            </button>
-                
+        <div className="bg-primary-light shadow-lg shadow-cyan-950 hover:shadow-cyan-900 transition-transform hover:shadow-lg duration-300 rounded-xl h-170 p-4 overflow-hidden">
+          <button 
+            onClick={onClose}
+            className="flex items-center justify-center rounded-2xl w-8 h-5 text-white cursor-pointer float-right"
+            >
+            <RxCross1 className="hover:text-hover"/>
+        </button>
+        
             <div className="flex flex-row m-3 gap-3 py-3">
                 <div className="flex flex-col gap-3">
                     <h1 className="font-semibold text-gray-100 text-xl sm:text-3xl sm:w-35">{city.name}</h1>
@@ -56,7 +62,9 @@ function CityDetails({city,weatherData,forecastData,onClose}) {
 
             <TodayCard forecastData={forecastData}/>
             <div className="border-t text-gray-300 w-full"></div>
-            <WeekCard forecastData={forecastData}/>
+            <div className="flex justify-center overflow-x-auto max-h-70 gap-2 hide-scrollbar">
+                <WeekCard forecastData={forecastData}/>
+            </div>
 
             
         </div>

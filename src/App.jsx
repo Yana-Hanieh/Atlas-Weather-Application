@@ -10,8 +10,7 @@ import SideBar from "./assets/components/SideBar.jsx";
 function App() {
  
   return (
-    <div>
-      <div className="bg-primary flex flex-row gap-3 p-4 items-stretch min-h-screen w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
+      <div className="bg-primary flex flex-row gap-3  items-stretch h-screen w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
         <SideBar/>
         <div className="flex flex-col lg:flex-row gap-3 flex-1 min-w-0 items-stretch">
             <Routes>
@@ -23,7 +22,6 @@ function App() {
               </Routes>
           </div>
       </div>
-    </div>
   );
 }
 

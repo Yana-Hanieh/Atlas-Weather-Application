@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { TiWeatherCloudy,TiWeatherDownpour } from "react-icons/ti";
-import { RiDrizzleFill,RiMistFill  } from "react-icons/ri";
-import { SiAccuweather } from "react-icons/si";
-import { IoThunderstorm } from "react-icons/io5";
-import { GiSnowing } from "react-icons/gi";
 import { getCoordsByCity, getForecastByCoords, getWeatherByCoords } from "../../api/weatherApi";
 import SearchBar from "../components/SearchBar";
 import CityDetails from "../components/CityDetails";
+import CityCard from "../components/CityCard";
+
 
 //each element is the "city" parameter that will be used in the citycard function
 const defaultCities = [ 
@@ -16,47 +13,6 @@ const defaultCities = [
   {name:"Shanghai", lat:31.2304, lon:121.4737},
   {name:"Tokyo", lat:35.6812, lon: 139.7671}
 ]
-
- function WeatherIcon({weather}){ //A function which takes the icon as a prop/variable from the api to display the weather icon based on its condition
-    if (weather === "Clouds")
-         return <TiWeatherCloudy className="text-slate-300 text-[2rem] sm:text-[5rem]"/>;
-     if (weather === "Clear") 
-         return <SiAccuweather className="text-yellow-300 text-[2rem] sm:text-[5rem] transform transition duration-300 hover:rotate-360"/>;
-     if (weather === "Rain")
-         return <TiWeatherDownpour className="text-blue-400 text-[2rem] sm:text-[5rem] "/>
-     if (weather === "Drizzle")
-         return <RiDrizzleFill className="text-blue-300 text-[2rem] sm:text-[5rem]"/>
-     if (weather === "Thunderstorm")
-         return <IoThunderstorm className="text-blue-800 text-[2rem] sm:text-[10rem]"/>
-     if (weather === "Snow")
-         return <GiSnowing className="text-blue-200 text-[2rem] sm:text-[5rem] "/>
-     if (weather === "Mist")
-         return <RiMistFill  className="text-blue-200 text-[2rem] sm:text-[5rem]"/>
- }
-
- //weather parameter is the weather data fetched from the api
- function CityCard({city,weather, onClick}){
-  if (!weather) 
-    return null;
-  return (
-    <div 
-      onClick={onClick}
-      className="rounded-2xl bg-primary-light p-6 shadow-lg shadow-cyan-950 hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 items-center w-full">
-      <div className="flex items-center justify-between sm:ml-25 sm:mr-20">
-        <WeatherIcon 
-          weather= {weather.weather[0].main} 
-        />
-        <div className="flex flex-col">
-          <p className="text-gray-200 font-semibold text-base sm:text-3xl sm:w-60">{city.name}</p>
-          <p className="text-gray-300 text-xs sm:text-base sm:w-45">{weather.weather[0].description}</p>
-        </div>
-        <p className="text-gray-200 text-xl sm:text-3xl font-semibold sm:w-20">{Math.round(weather.main.temp)}°C</p>
-      </div>
-      
-      
-    </div>
-  );
- }
 
  function Cities() {
     const [searchCity, setSearchCity] = useState([]); //cities entered by the user
@@ -111,19 +67,27 @@ const defaultCities = [
     }; 
 
   return (
-    <div className=" flex flex-row gap-3 px-4 pb-4 items-stretch min-h-screen w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
+    <div className="flex flex-row gap-3 px-4 pb-4 items-stretch min-h-screen w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
       <div className="flex flex-col lg:flex-row gap-3 flex-1 min-w-0 items-stretch">
         <div className="flex flex-col gap-5 flex-1 min-w-0">
-          <SearchBar 
+          
+          
+
+          <div className="w-full flex flex-col lg:flex-row justify-between gap-5  mt-3 cursor-pointer max-h-165 rounded-xl overflow-y-auto hide-scrollbar">
+            <div className="w-full flex flex-col gap-5">
+              <div className="flex flex-col w-full" >
+            <SearchBar 
             onSearch={handleSearch} //triggers the search logic without having the coords,states, or api
             input={searchCity} 
             setInput={setSearchCity} //the input will be changed every key is pressed
+            placeholder={"Search above to add more cities to this list."}
           />
-          {searchCity.length === 0 && (
-            <p className="text-gray-400 text-sm sm:text-base text-center mt-3">Search above to add more cities to this list.</p>
-          )}
+          {/* {searchCity.length === 0 && (
+            <p className="text-gray-400 text-sm sm:text-base text-center mt-3"></p>
+          )} */}
+          </div>
+              <div className="flex flex-col gap-5 w-full ">
 
-          <div className="flex flex-col gap-7 mt-3 cursor-pointer">
             {allCities.map((city) =>(
               <CityCard
                 key={city.name}
@@ -133,18 +97,26 @@ const defaultCities = [
               }
               />
             ))}
-          </div>
-        </div>
+            </div>
+            </div>
+            
 
-        {selectedCity &&(
-          <div className="w-full lg:w-80 shrink-0 lg:mt-13">
+              <div className={`w-1/4 md:mt-16 shrink-0 transition-all duration-300 ease-in-out transform origin-right 
+            ${selectedCity? "w-full lg:w-80  opacity-100 transalte-x-0 scale-100 pointer-events-auto"
+              :"w-0 lg:w-0 opacity-0 translate-x-8 scale-95 pointer-events-none overflow-hidden"
+            }`}>
+          {selectedCity &&(
             <CityDetails 
               city={selectedCity}
               weatherData= {weatherByCity[selectedCity.name]}
               forecastData={forecastByCity[selectedCity.name]}
               onClose={() => setSelectedCity(null)}/>
+          )}
+        </div>
           </div>
-        )}
+        </div>
+
+      
 
 
       </div>

@@ -23,8 +23,9 @@ function SideBar() {
   ]
   return ( //if the iscollapsed is false this return function will be executed, this is the default state, the icons along with the labels will show
     <div
-      className={`bg-primary-light rounded-xl text-white flex flex-col 
-        ${iscollapsed ? ` w-16 sm:w-20 gap-5 items-center` : `w-16 h-full sm:h-screen sm:w-35 gap-6 sm:gap-10`}`} 
+      className={`bg-primary-light z-50 rounded-xl text-white absolute sm:relative flex flex-col ring-1 ring-hover sm:ring-0 transition-all duration-300 ease-in-out
+        
+        ${iscollapsed ? ` w-16 sm:w-20 gap-5 items-center pb-6` : `w-16 h-fit sm:h-screen sm:w-35 gap-6 sm:gap-10 `}`} 
       >
         
       {/*top section of the sidebar that constains label, collapse icon, and line*/} 
@@ -38,7 +39,7 @@ function SideBar() {
           
               <GoSidebarCollapse 
                   onClick={() => setIsCollapsed(!iscollapsed)} //onclick function is used to switch the boolean value of iscollapsed, allowing the user to expand the sidebar upon clicking
-                  className="text-3xl mt-5 cursor-pointer flex item-center justify-center" />
+                  className="text-3xl mt-5 cursor-pointer flex item-center justify-center text-gray-200 hover:text-yellow-100" />
              ):(
               <GoSidebarExpand 
                 onClick={()=> setIsCollapsed(!iscollapsed)} //onclick function is used to switch the boolean value of iscollapsed, allowing the user to colllapse the sidebar upon clicking
