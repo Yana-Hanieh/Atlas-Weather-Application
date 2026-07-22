@@ -27,7 +27,7 @@ import { GiSnowing } from "react-icons/gi";
   return (
     <div 
       onClick={onClick}
-      className="rounded-2xl bg-primary-light p-6 shadow-lg shadow-cyan-950 hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 items-center w-full">
+      className="rounded-2xl bg-primary-light p-6 shadow-lg shadow-shadowColor hover:shadow-shadowColor-hover transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 items-center w-full">
       <div className="flex items-center justify-between sm:ml-25 sm:mr-20">
         <WeatherIcon 
           weather= {weather.weather[0].main} 

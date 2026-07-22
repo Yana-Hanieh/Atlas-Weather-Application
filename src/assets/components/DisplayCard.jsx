@@ -29,7 +29,7 @@ function WeatherIcon({weather}){ //A function which takes the icon as a prop/var
 function DisplayCard({weatherData, forecastData, loading, error}){ //enter the location, tempreater, rain percentage, and corresponding icon for the weather
   if (loading) {
   return (
-    <div className="flex items-center justify-center min-h-[300px] w-full gap-3 text-cyan-400">
+    <div className="flex items-center justify-center w-full gap-3 text-cyan-400">
       <CgSpinner className="animate-spin text-4xl" />
       <span className="text-gray-200 font-medium">Loading Weather...</span>
     </div>
@@ -61,7 +61,7 @@ function DisplayCard({weatherData, forecastData, loading, error}){ //enter the l
                 </div>
 
                 <div className="mt-8 flex flex-col gap-10">
-                    <div className=" hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 rounded-xl">
+                    <div className=" hover:shadow-shadowColor-hover transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 rounded-xl">
                         <TodayCard forecastData={forecastData}/> {/*use the TodayCard hook as first card containing the current weather data */}
                     </div>
                     <AirConditionsCard weatherData={weatherData}/> {/*use the AirConditionsCard hook as a second card containing the air con ditions data */}

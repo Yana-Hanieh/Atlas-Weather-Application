@@ -122,7 +122,7 @@ function Weather() {
       
       <div className="flex flex-col">
         <p className="h-12"></p>
-        <div className=" md:mt-16 w-full h-full lg:w-80 shrink-0 rounded-xl hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300">
+        <div className=" md:mt-16 w-full h-full lg:w-80 shrink-0 rounded-xl hover:shadow-shadowColor transition-transform hover:-translate-y-2 hover:shadow-lg duration-300">
           <WeekCard forecastData={forecastData}/> {/* use the WeekCard hook as a third card containing the weekly weather data (displayed on the rightside of the screen) */}
         </div>
       </div>

@@ -23,16 +23,16 @@ function SideBar() {
   ]
   return ( //if the iscollapsed is false this return function will be executed, this is the default state, the icons along with the labels will show
     <div
-      className={`bg-primary-light z-50 rounded-xl text-white absolute sm:relative flex flex-col ring-1 ring-hover sm:ring-0 transition-all duration-300 ease-in-out
+      className={`bg-primary-light z-50 rounded-r-xl text-white absolute sm:relative flex flex-col ring-1 ring-hover sm:ring-0 transition-all duration-300 ease-in-out mt-3 sm:mt-0 sm:pt-3
         
         ${iscollapsed ? ` w-16 sm:w-20 gap-5 items-center pb-6` : `w-16 h-fit sm:h-screen sm:w-35 gap-6 sm:gap-10 `}`} 
       >
         
       {/*top section of the sidebar that constains label, collapse icon, and line*/} 
       <div> 
-        <div className="flex flex-row gap-5 items-center justify-center"> {/*the label and collapse icon are in a flex row so they are on the same row/x-axis*/ }
+        <div className="flex flex-row gap-5 items-center justify-center h-[40px] "> {/*the label and collapse icon are in a flex row so they are on the same row/x-axis*/ }
           {!iscollapsed &&(
-            <h2 className="hidden md:block text-xl mt-5">Sidebar</h2>
+            <h2 className="hidden sm:block text-xl ">Sidebar</h2>
           )}
          
           {iscollapsed ? (
@@ -43,15 +43,15 @@ function SideBar() {
              ):(
               <GoSidebarExpand 
                 onClick={()=> setIsCollapsed(!iscollapsed)} //onclick function is used to switch the boolean value of iscollapsed, allowing the user to colllapse the sidebar upon clicking
-                className="text-2xl mt-5 cursor-pointer text-gray-200 hover:text-yellow-100" 
+                className="text-2xl cursor-pointer text-gray-200 hover:text-yellow-100" 
               /> 
             )}
    
         </div> 
       
         {/*The line under the sidebar, used to separate the collapse icon from the sidebar icons*/}
-        <div className={`mt-3 
-          ${iscollapsed ? "border-b border-white w-full":" border-0 sm:border-b border-gray-200"}`}></div> 
+        <div className={` 
+          ${iscollapsed ? "border-b border-white w-full mt-3":" border-0 sm:border-b border-gray-200 sm:mt-3"}`}></div> 
         </div> 
           {/*the elements of the sidebar (icons + labels)*/ }
           <div className= {`flex flex-col gap-4 font-semibold items-center text-gray-200 

@@ -8,7 +8,7 @@ function AirConditionsCard({weatherData}) {
     const {main,wind,clouds} = weatherData; //save the weatherData into the 4 seperate variables (arrays) to easily call their values
     
     return(
-        <div className=" bg-primary-light auto shadow-lg shadow-cyan-950 hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 rounded-xl items-center px-4 py-1 w-full">
+        <div className=" bg-primary-light auto shadow-lg shadow-shadowColor hover:shadow-shadowColor-hover transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 rounded-xl items-center px-4 py-1 w-full">
             <h2 className="font-medium text-white text-2xl m-3">Air Conditions</h2>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-6 gap-y-6 px-4 md:px-6 mt-4 pb-4"> {/*grid layout used to display the hrs, temp, and icon in a grid format*/}

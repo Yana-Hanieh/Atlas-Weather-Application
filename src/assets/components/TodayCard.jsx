@@ -23,7 +23,7 @@ function TodayCard({forecastData}){
     if (!forecastData) return null; //if data doesnt exist, dont render the page
     const hourData = forecastData.list.slice(0,8); //takes the first 8 entries, 3hrs apart 
     return(
-        <div className=" bg-primary-light auto shadow-lg shadow-cyan-950 rounded-xl items-center px-4 py-2 w-full">
+        <div className=" bg-primary-light auto shadow-lg shadow-shadowColor rounded-xl items-center px-4 py-2 w-full">
             <h2 className="font-medium text-white text-lg sm:text-2xl mt-3">Today's Forecast</h2>
             <div className="flex overflow-x-auto gap-2 hide-scrollbar"> {/*grid layout used to display the hrs, temp, and icon in a grid format*/}
                 {hourData.map((Data,index) => ( 

@@ -14,12 +14,12 @@
   return (
     <div className=" bg-primary flex flex-row gap-3 px-4 pb-4 items-stretch min-h-screen w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
       <div className="flex flex-col lg:flex-row gap-3 flex-1 min-w-0 items-stretch">
-        <div className="flex flex-col gap-5 flex-1 min-w-0">
+        <div className="flex flex-col gap-5 flex-1 min-w-0 pt-4">
         <SearchBar 
        />
 
          {/**City cards */}
-        {/* <div className="border rounded-2xl bg-primary-light px-4 py-8 flex flex-row gap-2 shadow-lg shadow-cyan-950 hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 items-center w-full">
+        {/* <div className="border rounded-2xl bg-primary-light px-4 py-8 flex flex-row gap-2 shadow-lg shadow-shadowColor hover:shadow-shadowColor-hover transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 items-center w-full">
           <span className="">
             <GiSnowing />
           </span>

@@ -39,7 +39,7 @@ function CityDetails({city,weatherData,forecastData,onClose}) {
    const condition = weather[0].main; //a variable containing the main element found in the "weather" array  which helps choose the weather icon, NOTE: its the main element inside the weather array, 
    
     return(
-        <div className="bg-primary-light shadow-lg shadow-cyan-950 hover:shadow-cyan-900 transition-transform hover:shadow-lg duration-300 rounded-xl h-170 p-4 overflow-hidden">
+        <div className="bg-primary-light shadow-lg shadow-shadowColor hover:shadow-shadowColor-hover transition-transform hover:shadow-lg duration-300 rounded-xl h-170 p-4 overflow-hidden">
           <button 
             onClick={onClose}
             className="flex items-center justify-center rounded-2xl w-8 h-5 text-white cursor-pointer float-right"

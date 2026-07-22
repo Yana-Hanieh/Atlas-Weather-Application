@@ -9,7 +9,7 @@ import SearchBar from "../components/SearchBar";
        />
 
          {/**City cards */}
-        {/* <div className="border rounded-2xl bg-primary-light px-4 py-8 flex flex-row gap-2 shadow-lg shadow-cyan-950 hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 items-center w-full">
+        {/* <div className="border rounded-2xl bg-primary-light px-4 py-8 flex flex-row gap-2 shadow-lg shadow-shadowColor hover:shadow-shadowColor-hover transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 items-center w-full">
           <span className="">
             <GiSnowing />
           </span>
