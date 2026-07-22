@@ -79,9 +79,6 @@ const defaultCities = [
     <div className="flex flex-row gap-3 px-4 pb-4 items-stretch min-h-screen w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
       <div className="flex flex-col lg:flex-row gap-3 flex-1 min-w-0 items-stretch">
         <div className="flex flex-col gap-5 flex-1 min-w-0">
-          
-          
-
           <div className="w-full flex flex-col lg:flex-row justify-between gap-5  mt-3 cursor-pointer max-h-165 rounded-xl overflow-y-auto hide-scrollbar">
             <div className="w-full flex flex-col gap-5">
               <div className="flex flex-col w-full" >
@@ -103,7 +100,7 @@ const defaultCities = [
         
               </div>
 
-              <div className="flex flex-col gap-5 w-full ">
+              <div className="flex flex-col gap-5 w-full">
                 {allCities.map((city) =>(
                   <CityCard
                     key={city.name}
