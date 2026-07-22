@@ -3,6 +3,7 @@ import { RiDrizzleFill,RiMistFill  } from "react-icons/ri";
 import { SiAccuweather } from "react-icons/si";
 import { IoThunderstorm } from "react-icons/io5";
 import { GiSnowing } from "react-icons/gi";
+import { CgSpinner } from "react-icons/cg";
 import TodayCard from "./TodayCard.jsx";
 import AirConditionsCard from "./AirConditionsCard.jsx";
 import WeekCard from "./WeekCard.jsx";
@@ -26,9 +27,14 @@ function WeatherIcon({weather}){ //A function which takes the icon as a prop/var
 }
 
 function DisplayCard({weatherData, forecastData, loading, error}){ //enter the location, tempreater, rain percentage, and corresponding icon for the weather
-   if (loading){ //if its fetching the data show a message
-    return <p className="text-gray-100 text-2xl m-20 ">Loading Weather....</p>;
-   }
+  if (loading) {
+  return (
+    <div className="flex items-center justify-center min-h-[300px] w-full gap-3 text-cyan-400">
+      <CgSpinner className="animate-spin text-4xl" />
+      <span className="text-gray-200 font-medium">Loading Weather...</span>
+    </div>
+  );
+}
    if (error){ //if an error occurs show a warning
     return <p className="text-red-600 text-2xl m-20">{error}</p>;
    }

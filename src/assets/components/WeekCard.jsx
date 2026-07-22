@@ -65,9 +65,9 @@ function WeekCard({forecastData}){
                 {weekData.map((day,index) => (
                     <div key={index} 
                         className="flex-1 text-sm sm:text-lg text-gray-200 font-medium flex flex-row items-center gap-2 py-4 border-b-2 border-gray-400 last:border-b-0 hide-scrollbar">
-                        <p title={day.dayName} className="truncate w-15">{day.dayName}</p>
+                        <p title={day.dayName} className="truncate w-18">{day.dayName}</p>
                         <p className="w-15 flex justify-center"><WeekIcon icon={day.condition} /></p>
-                        <p title={day.description} className="truncate w-15 text-xs sm:text-sm">{day.description}</p>
+                        <p title={day.description} className="truncate w-16 text-xs sm:text-sm">{day.description}</p>
                         <p className="w-15 text-right text-xs sm:text-sm">{day.high}/{day.low}</p>
                     </div>
                     

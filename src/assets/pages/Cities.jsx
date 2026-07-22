@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { getCoordsByCity, getForecastByCoords, getWeatherByCoords } from "../../api/weatherApi";
+import { IoWarningOutline } from 'react-icons/io5'
 import SearchBar from "../components/SearchBar";
 import CityDetails from "../components/CityDetails";
 import CityCard from "../components/CityCard";
@@ -20,6 +21,7 @@ const defaultCities = [
     const [forecastByCity, setForecastByCity] = useState({}) //an obj saving the current forecast data displayed for each city
     const [input, setInput] = useState("");
     const [selectedCity, setSelectedCity] = useState(null); //used to determine if the city card is pressed
+    const [searchError, setSearchError] = useState(null) // used for the search warning, if user inputs wrong city names
     const navigate = useNavigate();
     const searchedCities = new Set(searchCity.map((c) => c.name.toLowerCase()));
     const filteredDefaultCities= defaultCities.filter((city)=> !searchedCities.has(city.name.toLowerCase()));
@@ -54,16 +56,23 @@ const defaultCities = [
    }, [searchCity]);
 
     const handleSearch = async (cityName) => {
-     if (cityName.trim() === "") //if input is empty, dont fetch any data
+      if (cityName.trim() === "") //if input is empty, dont fetch any data
         return; 
+
+      setSearchError(null);
       try { 
         const coords = await getCoordsByCity(cityName); 
         setSearchCity((prev) => {
-          const filteredSearchedCities = prev.filter((c) => c.name.toLowerCase() !== cityName.trim().toLowerCase()); //checks if the previously searched names match the newly searched city name 
-          return [...filteredSearchedCities, { name: cityName, ...coords }]}); //adds the newly distinct searched city into the filtered search list
+          const filteredSearchedCities = prev.filter((c) =>
+            c.name.toLowerCase() !== cityName.trim().toLowerCase() //checks if the previously searched names match the newly searched city name 
+            && !(Math.abs(c.lat - coords.lat) < 0.01 && Math.abs(c.lon - coords.lon) < 0.01) //checks for lat and lon matches and removes them
+          );
+          return [...filteredSearchedCities, { ...coords, name: cityName }];
+        }); //adds the newly distinct searched city into the filtered search list
       } catch (err) { 
-        console.error(err); 
-      } 
+          setSearchError(`City "${cityName}" not found`); //the error handeling case when user inputs unknown city name
+          setTimeout(() => setSearchError(null),4000); //the warning is visible for 4 seconds only
+      }
     }; 
 
   return (
@@ -76,48 +85,53 @@ const defaultCities = [
           <div className="w-full flex flex-col lg:flex-row justify-between gap-5  mt-3 cursor-pointer max-h-165 rounded-xl overflow-y-auto hide-scrollbar">
             <div className="w-full flex flex-col gap-5">
               <div className="flex flex-col w-full" >
-            <SearchBar 
-            onSearch={handleSearch} //triggers the search logic without having the coords,states, or api
-            input={searchCity} 
-            setInput={setSearchCity} //the input will be changed every key is pressed
-            placeholder={"Search above to add more cities to this list."}
-          />
-          {/* {searchCity.length === 0 && (
-            <p className="text-gray-400 text-sm sm:text-base text-center mt-3"></p>
-          )} */}
-          </div>
-              <div className="flex flex-col gap-5 w-full ">
-
-            {allCities.map((city) =>(
-              <CityCard
-                key={city.name}
-                city={city}
-                weather={weatherByCity[city.name]} 
-                onClick = {() => setSelectedCity(city)
-              }
+                <SearchBar 
+                onSearch={handleSearch} //triggers the search logic without having the coords,states, or api
+                input={searchCity} 
+                setInput={setSearchCity} //the input will be changed every key is pressed
+                placeholder={"Search above to add more cities to this list."}
               />
-            ))}
-            </div>
+              {/* {searchCity.length === 0 && (
+                <p className="text-gray-400 text-sm sm:text-base text-center mt-3"></p>
+              )} */}
+                {searchError && (
+                      <div className="flex items-center gap-2 mt-4 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2.5 rounded-xl text-sm transition-all animate-fadeIn">
+                        <IoWarningOutline className='text-lg shrink-0'/>
+                        <span>{searchError}</span>
+                      </div>
+                    )}
+        
+              </div>
+
+              <div className="flex flex-col gap-5 w-full ">
+                {allCities.map((city) =>(
+                  <CityCard
+                    key={city.name}
+                    city={city}
+                    weather={weatherByCity[city.name]} 
+                    onClick = {() => setSelectedCity(city)
+                  }
+                  />
+                ))}
+              </div>
+
             </div>
             
 
               <div className={`w-1/4 md:mt-16 shrink-0 transition-all duration-300 ease-in-out transform origin-right 
-            ${selectedCity? "w-full lg:w-80  opacity-100 transalte-x-0 scale-100 pointer-events-auto"
-              :"w-0 lg:w-0 opacity-0 translate-x-8 scale-95 pointer-events-none overflow-hidden"
-            }`}>
-          {selectedCity &&(
-            <CityDetails 
-              city={selectedCity}
-              weatherData= {weatherByCity[selectedCity.name]}
-              forecastData={forecastByCity[selectedCity.name]}
-              onClose={() => setSelectedCity(null)}/>
-          )}
-        </div>
+                ${selectedCity? "w-full lg:w-80  opacity-100 transalte-x-0 scale-100 pointer-events-auto"
+                  :"w-0 lg:w-0 opacity-0 translate-x-8 scale-95 pointer-events-none overflow-hidden"
+                }`}>
+                {selectedCity &&(
+                  <CityDetails 
+                    city={selectedCity}
+                    weatherData= {weatherByCity[selectedCity.name]}
+                    forecastData={forecastByCity[selectedCity.name]}
+                    onClose={() => setSelectedCity(null)}/>
+                )}
+              </div>
           </div>
         </div>
-
-      
-
 
       </div>
     </div>

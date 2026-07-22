@@ -3,6 +3,7 @@ import DisplayCard from '../components/DisplayCard.jsx'
 import WeekCard from '../components/WeekCard.jsx'
 import { useState, useEffect } from "react"
 import {getWeatherByCoords,getCoordsByCity, getForecastByCoords} from '../../api/weatherApi.js'
+import { IoWarningOutline } from 'react-icons/io5'
 
 const defaultLocation = {lat:51.5073219, lon:-0.1276474}; //a default location object if user denies access or problems encountered
 
@@ -12,7 +13,8 @@ function Weather() {
   const [location,setLocation]= useState(null); //location set to null before asking the user for permission for location, if user accepts location is changed to user's current location, if user rejects location is set to default 
   const [weatherData, setWeatherData] = useState(null); //weather data is initially null so when no data is found, no data appears/renders
   const [loading, setLoading] = useState(true); //initially true, since it will first load to show the data then will be switched to false when the weather fetch is done regardless if its a success or a fail 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); //used for api call error 
+  const [searchError, setSearchError] = useState(null); // used for the search warning, if user inputs wrong city names
   const [forecastData, setForecastData] = useState(null); //forecast data is initially null so when no data is found, no data appears/renders
   
   function requestGeolocation() { //responsible for the geolocation support and access
@@ -49,7 +51,10 @@ function Weather() {
   useEffect (() => { //responsible for fetching the data, it reacts to the location and calls the API Function
     if (!location) //if location is not available, dont fetch any data
       return;
+
     setLoading(true); //shows the loading state while the data is being fetched 
+    setError(null);
+
     Promise.all([
       getWeatherByCoords(location.lat,location.lon), //calls the getWeatherByCoords function from the weather.js file, passing the location's (user or default) lat and lon 
       getForecastByCoords(location.lat,location.lon) //calls the getForecastByCoords function from the weather.js file, passing the location's (user or default) lat and lon
@@ -60,8 +65,7 @@ function Weather() {
         setForecastData(forecast)
       })
       .catch ((err) => { //promise method runs only if the promise fails/rejectcalls .then() internally, doesnt pass the fulfillment handler, only runs if the error gets passed as the argument
-        console.error(err); //temporary error used until the real error state arrives
-        //setError(err.message) the actual error handeling case
+        setError("Failed to load weather data"); //the actual error handling case
       })
       .finally(() => { //promise method always runs once after the .then() or the .catch() finishes
         setLoading(false); //turn off he loading state regardless if it succeeded or failed
@@ -79,13 +83,14 @@ function Weather() {
    }, [weatherData]); //runs whenever weatherData changes (new search or geolocation)
 
   const handleSearch = async(cityName) => { //an event handler that gets called by the SearchBar when the user submits a search, it only handles the coordinates
+    setSearchError(null);
     try{
       const coords= await getCoordsByCity(cityName); //converts the coordinates of the searched city into lat and lon coordinates
       setLocation (coords); //updates the location which triggeres the existing fetch-effect in the weather.js file automatically
     }
     catch(err){
-      console.error(err); //temporary error used until the real error state arrives
-        //setError(err.message) the actual error handeling case
+      setSearchError(`City "${cityName}" not found`); //the error handeling case when user inputs unknown city name
+      setTimeout(() => setSearchError(null),4000); //the warning is visible for 4 seconds only
     }
   };
 
@@ -99,6 +104,13 @@ function Weather() {
           setInput={setSearchInput} //the input will be changed every key is pressed
         />
 
+        {searchError && (
+          <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2.5 rounded-xl text-sm transition-all animate-fadeIn">
+            <IoWarningOutline className='text-lg shrink-0'/>
+            <span>{searchError}</span>
+          </div>
+        )}
+
         <DisplayCard
           weatherData={weatherData} //the actual data to render once it exists
           forecastData ={forecastData} //the data used to render the weekly card
@@ -111,8 +123,7 @@ function Weather() {
       <div className="flex flex-col">
         <p className="h-12"></p>
         <div className=" md:mt-16 w-full h-full lg:w-80 shrink-0 rounded-xl hover:shadow-cyan-900 transition-transform hover:-translate-y-2 hover:shadow-lg duration-300">
- 
-              <WeekCard forecastData={forecastData}/> {/* use the WeekCard hook as a third card containing the weekly weather data (displayed on the rightside of the screen) */}
+          <WeekCard forecastData={forecastData}/> {/* use the WeekCard hook as a third card containing the weekly weather data (displayed on the rightside of the screen) */}
         </div>
       </div>
 
