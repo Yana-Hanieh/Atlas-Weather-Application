@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { getCoordsByCity, getForecastByCoords, getWeatherByCoords } from "../../api/weatherApi";
+import { getCoordsByCity, getForecastByCoords, getWeatherByCoords } from "../api/weatherApi";
 import { IoWarningOutline } from 'react-icons/io5'
 import SearchBar from "../components/SearchBar";
 import CityDetails from "../components/CityDetails";
@@ -100,7 +100,7 @@ const defaultCities = [
         
               </div>
 
-              <div className="flex flex-col gap-5 w-full">
+              <div className="flex flex-col gap-5 w-full overflow-y-auto max-h-165 hide-scrollbar">
                 {allCities.map((city) =>(
                   <CityCard
                     key={city.name}

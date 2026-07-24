@@ -2,12 +2,10 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {  GoSidebarExpand, GoSidebarCollapse } from "react-icons/go";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { FaCity,FaMap } from "react-icons/fa";
-import { IoSettings } from "react-icons/io5";
 import { useState} from "react";
 import Weather from "../pages/Weather";
 import Cities from "../pages/Cities";
 import Map from "../pages/Map";
-import Settings from "../pages/Settings";
 
 
 function SideBar() {
@@ -19,7 +17,6 @@ function SideBar() {
     {Label: "Weather", Path:"/weather", Icon:TiWeatherPartlySunny },
     {Label: "Cities", Path:"/cities", Icon:FaCity },
     {Label: "Map", Path:"/map", Icon:FaMap },
-    {Label: "Settings", Path:"/settings", Icon:IoSettings },
   ]
   return ( //if the iscollapsed is false this return function will be executed, this is the default state, the icons along with the labels will show
     <div
@@ -32,7 +29,7 @@ function SideBar() {
       <div> 
         <div className="flex flex-row gap-5 items-center justify-center h-[40px] "> {/*the label and collapse icon are in a flex row so they are on the same row/x-axis*/ }
           {!iscollapsed &&(
-            <h2 className="hidden sm:block text-xl ">Sidebar</h2>
+            <h2 className="hidden sm:block text-xl ">Clouder</h2>
           )}
          
           {iscollapsed ? (

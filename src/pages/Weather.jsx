@@ -2,7 +2,7 @@ import SearchBar from '../components/SearchBar.jsx'
 import DisplayCard from '../components/DisplayCard.jsx'
 import WeekCard from '../components/WeekCard.jsx'
 import { useState, useEffect } from "react"
-import {getWeatherByCoords,getCoordsByCity, getForecastByCoords} from '../../api/weatherApi.js'
+import {getWeatherByCoords,getCoordsByCity, getForecastByCoords} from '../api/weatherApi.js'
 import { IoWarningOutline } from 'react-icons/io5'
 
 const defaultLocation = {lat:51.5073219, lon:-0.1276474}; //a default location object if user denies access or problems encountered

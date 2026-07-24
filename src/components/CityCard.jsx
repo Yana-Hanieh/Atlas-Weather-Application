@@ -3,7 +3,8 @@ import { RiDrizzleFill,RiMistFill  } from "react-icons/ri";
 import { SiAccuweather } from "react-icons/si";
 import { IoThunderstorm } from "react-icons/io5";
 import { GiSnowing } from "react-icons/gi"; 
- function WeatherIcon({weather}){ //A function which takes the icon as a prop/variable from the api to display the weather icon based on its condition
+
+function WeatherIcon({weather}){ //A function which takes the icon as a prop/variable from the api to display the weather icon based on its condition
     if (weather === "Clouds")
          return <TiWeatherCloudy className="text-slate-300 text-[2rem] sm:text-[5rem]"/>;
      if (weather === "Clear") 

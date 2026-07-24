@@ -62,7 +62,7 @@ function CityDetails({city,weatherData,forecastData,onClose}) {
 
             <TodayCard forecastData={forecastData}/>
             <div className="border-t text-gray-300 w-full"></div>
-            <div className="flex justify-center overflow-x-auto max-h-70 gap-2 hide-scrollbar">
+            <div className="flex justify-center overflow-x-auto max-h-90 sm:max-h-80 gap-2 hide-scrollbar">
                 <WeekCard forecastData={forecastData}/>
             </div>
 
