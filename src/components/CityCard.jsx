@@ -29,7 +29,7 @@ function WeatherIcon({weather}){ //A function which takes the icon as a prop/var
   return (
     <div 
       onClick={onClick}
-      className="flex items-start rounded-2xl bg-primary-light p-6 shadow-lg shadow-shadowColor hover:shadow-shadowColor-hover transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 w-full">
+      className="flex items-start rounded-2xl bg-primary-light p-6 shadow-sm shadow-shadowColor hover:shadow-shadowColor-hover transition-transform hover:-translate-y-2 hover:shadow-sm duration-300 w-full">
       
       <div className="flex items-center justify-evenly gap-3  h-full flex-1">
         <div className="">

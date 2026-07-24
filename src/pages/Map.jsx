@@ -97,7 +97,7 @@ function Map() {
      }, [searchCity]);
 
   //plotting custom UI markers on the map
-  useEffect(()=> { 
+  useEffect(()=> {
     if (!mapInstanceRef.current) //if no markers found on the map, dont render anything
       return; 
     
@@ -114,7 +114,7 @@ function Map() {
         const iconHTML = ReactDOMServer.renderToStaticMarkup(<WeatherIcon weather = {condition}/>) //converts the weatherIcon (react icons) into plain HTML 
 
         const DOM_elment = document.createElement("div"); //creates a standard browser div element in memory
-        DOM_elment.className="custom-mapbox-marker bg-primary text-white px-4 py-3 rounded-2xl flex flex-col items-center gap-1 shadow-lg shadow-shadowColor min-w-25"; //applies the styling on the standard browser div
+        DOM_elment.className="custom-mapbox-marker bg-primary text-white px-4 py-3 rounded-2xl flex flex-col items-center gap-1 shadow-sm shadow-shadowColor min-w-25"; //applies the styling on the standard browser div
         //injects the city name, weather icon in plain HTML and the temp into the memory div 
         DOM_elment.innerHTML = `<p class="font-semibold text-sm">${city.name}</p> 
                         <div class="flex justify-center">${iconHTML}</div>

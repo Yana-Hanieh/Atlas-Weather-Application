@@ -61,7 +61,7 @@ function DisplayCard({weatherData, forecastData, loading, error}){ //enter the l
                 </div>
 
                 <div className="mt-8 flex flex-col gap-10">
-                    <div className=" hover:shadow-shadowColor-hover transition-transform hover:-translate-y-2 hover:shadow-lg duration-300 rounded-xl">
+                    <div className=" hover:shadow-shadowColor-hover transition-transform hover:-translate-y-2 hover:shadow-sm duration-300 rounded-xl">
                         <TodayCard forecastData={forecastData}/> {/*use the TodayCard hook as first card containing the current weather data */}
                     </div>
                     <AirConditionsCard weatherData={weatherData}/> {/*use the AirConditionsCard hook as a second card containing the air con ditions data */}

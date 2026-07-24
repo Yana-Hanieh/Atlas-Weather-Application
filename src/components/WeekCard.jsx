@@ -58,7 +58,7 @@ function WeekCard({forecastData}){
     const weekData = groupForecastByDay(forecastData); //actually calls the grouping function
 
     return(
-        <div className="flex flex-col bg-primary-light shadow-lg shadow-shadowColor rounded-xl h-full p-5 justify-between w-full">
+        <div className="flex flex-col bg-primary-light shadow-sm shadow-shadowColor rounded-xl h-full p-5 justify-between w-full">
             <h2 className="font-medium text-white text-2xl">6 Day Forecast</h2>
             <div className="flex flex-col justify-between flex-1">
                 
