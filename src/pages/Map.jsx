@@ -1,4 +1,4 @@
-import {useRef, useEffect, useState} from "react";
+import {useRef, useEffect, useState, useMemo} from "react";
 import { useNavigate } from "react-router-dom";
 import { getCoordsByCity, getWeatherByCoords } from "../api/weatherApi";
 import ReactDOMServer from "react-dom/server" ;
@@ -48,8 +48,20 @@ function Map() {
   const navigate = useNavigate();
 
   const searchedCities = new Set(searchCity.map((c) => c.name.toLowerCase()));
-  const filteredDefaultCities= defaultCities.filter((city)=> !searchedCities.has(city.name.toLowerCase()));
-  const allCities = [...[...searchCity].reverse(),...filteredDefaultCities]; //combined list of the default and searched city, used to easily display the cities 
+  const filteredDefaultCities= useMemo(()=>{
+    return defaultCities.filter((city)=> !searchedCities.has(city.name.toLowerCase()));
+  }, [defaultCities])
+  const citiesList = useMemo(()=>{
+    return [...[...searchCity].reverse(),...filteredDefaultCities]
+  },[searchCity, filteredDefaultCities]); //combined list of the default and searched city, used to easily display the cities 
+  
+
+
+
+  const [allCities, setAllCities] = useState(citiesList)
+
+
+
   
   useEffect(() => { //creating the map once on mount
     mapInstanceRef.current = new mapboxgl.Map ({
@@ -92,7 +104,10 @@ function Map() {
       markersRef.current.forEach((marker) => marker.remove()); //removes any existing markers from the map before plotting new ones 
       markersRef.current = [];
 
+      
+
       allCities.forEach((city) => {
+        
         const weather = weatherByCity[city.name];
         const temp = weather ? `${Math.round(weather.main.temp)}°` : "--°"; //saves the city temp (if known) or -- if unknown in temp variable thats used later to display in the card 
         const condition = weather ? weather.weather[0].main : null; //take the condition from the api data if available or null if not
@@ -112,7 +127,7 @@ function Map() {
 
         markersRef.current.push(marker);
       });
-  }, [allCities]); //reruns the marker plotter when the city list or their weather data changes
+  }, [allCities, weatherByCity]); //reruns the marker plotter when the city list or their weather data changes
 
   const handleSearch = async(cityName) => { //an event handler that gets called by the SearchBar when the user submits a search, it only handles the coordinates
     if (cityName.trim() === "") //if input is empty, dont fetch any data
@@ -120,17 +135,32 @@ function Map() {
     try{
       const coords = await getCoordsByCity(cityName); //converts the coordinates of the searched city into lat and lon coordinates
       setSelectedCity({name: cityName, ...coords}); //updates the location which triggeres the existing fetch-effect in the weather.js file automatically
-      setSearchCity((prev) => {
+      const filtered = searchCity.filter((c) =>
+          c.name.toLowerCase() !== cityName.trim().toLowerCase() && !(Math.abs(c.lat - coords.lat) < 0.01 && Math.abs(c.lon - coords.lon) < 0.01)); 
+      const newCities =  [...filtered, {...coords,name:cityName}];
+      setSearchCity(newCities);
+      setAllCities((prev)=>{
         const filtered = prev.filter((c) =>
           c.name.toLowerCase() !== cityName.trim().toLowerCase() && !(Math.abs(c.lat - coords.lat) < 0.01 && Math.abs(c.lon - coords.lon) < 0.01)); 
-          return [...filtered, {...coords,name:cityName}];
-      });
+       return [{...coords,name:cityName},...filtered]
+      })
     }
     catch(err){
       setSearchError(`City "${cityName}" not found`); //the error handeling case when user inputs unknown city name
       setTimeout(() => setSearchError(null),4000); //the warning is visible for 4 seconds only
       }
   };
+  
+
+
+  const handleClear = (index)=>{
+      const newArr = [
+  ...allCities.slice(0, index),
+  ...allCities.slice(index + 1)];
+
+  setAllCities(newArr)
+  setSearchCity(newArr)
+  }
 
   return (
     <div className=" flex flex-row gap-3 px-4 pb-4 items-stretch w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
@@ -146,20 +176,22 @@ function Map() {
                     </div>
           )}
 
-          <div className="flex flex-col sm:flex-row gap-3 h-160 mt-4">
+          <div className="flex flex-col lg:flex-row gap-3 h-160 mt-4">
             <div
               ref={mapContainerRef} 
-              className="sm:w-1/2 h-full w-full rounded-xl">
+              className="lg:w-1/2 h-full w-full rounded-xl">
             </div>
             
-            <div className="sm:w-1/2 w-full flex flex-col gap-5 cursor-pointer max-h-165 rounded-xl overflow-y-auto hide-scrollbar">
-                {allCities.map((city) =>(
+            <div className="lg:w-1/2 w-full flex flex-col gap-5 cursor-pointer max-h-165 rounded-xl overflow-y-auto hide-scrollbar">
+                {allCities.map((city, i) =>(
                       <CityCard
                         key={city.name}
                         city={city}
                         weather={weatherByCity[city.name]} 
-                        onClick = {() => setSelectedCity(city)
-                      }
+                        onClick = {() => setSelectedCity(city)}
+                      onClear={()=>{
+                        handleClear(i)
+                      }}
                       />
                     ))}
             </div>

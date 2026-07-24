@@ -14,8 +14,8 @@ function SearchBar({onSearch, placeholder}) { //uses the onSearch function from 
       <>
         <form 
           onSubmit={handleSubmit}
-          className="bg-primary-light rounded-xl flex items-center px-7 py-2 w-full ">
-            <FaSearch className="mt-2 text-gray-100 "/> 
+          className="bg-primary-light rounded-xl flex items-center px-7 py-2 w-full">
+            <FaSearch className="text-gray-100 "/> 
             <input 
               type="text"
               placeholder={placeholder || "City"}

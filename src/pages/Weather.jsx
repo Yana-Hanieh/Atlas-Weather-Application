@@ -95,7 +95,7 @@ function Weather() {
   };
 
   return (
-    <div className=" bg-primary flex flex-row gap-3 px-4 pb-4 items-stretch min-h-screen w-full overflow-y-auto hide-scrollbar"> {/* search bar and side bar are aligned from the top so they start in the same height */}
+    <div className="flex flex-row gap-3 px-4 pb-4 items-stretch min-h-screen w-full overflow-y-auto hide-scrollbar"> {/* search bar and side bar are aligned from the top so they start in the same height */}
       <div className="flex flex-col lg:flex-row gap-3 flex-1 min-w-0 items-stretch">
         <div className="flex flex-col gap-5 flex-1 min-w-0 pt-4">
         <SearchBar 

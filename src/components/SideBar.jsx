@@ -27,7 +27,7 @@ function SideBar() {
         
       {/*top section of the sidebar that constains label, collapse icon, and line*/} 
       <div> 
-        <div className="flex flex-row gap-5 items-center justify-center h-[40px] "> {/*the label and collapse icon are in a flex row so they are on the same row/x-axis*/ }
+        <div className="flex flex-row gap-5 items-center justify-center h-10"> {/*the label and collapse icon are in a flex row so they are on the same row/x-axis*/ }
           {!iscollapsed &&(
             <h2 className="hidden sm:block text-xl ">Clouder</h2>
           )}
