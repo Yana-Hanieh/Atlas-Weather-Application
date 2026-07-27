@@ -166,9 +166,11 @@ function Map() {
     <div className=" flex flex-row gap-3 px-4 pb-4 items-stretch w-full"> {/* search bar and side bar are aligned from the top so they start in the same height */}
       <div className="flex flex-col lg:flex-row gap-3 flex-1 min-w-0 items-stretch pt-4 ">
         <div className="gap-5 flex-1 min-w-0">
-          <SearchBar 
-            onSearch={handleSearch}
-          />
+          <div className="pl-8 sm:pl-0 w-full">
+            <SearchBar 
+              onSearch={handleSearch}
+            />
+          </div>
           {searchError && (
                     <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2.5 rounded-xl text-sm transition-all animate-fadeIn">
                       <IoWarningOutline className='text-lg shrink-0'/>

@@ -21,8 +21,7 @@ function SideBar() {
   return ( //if the iscollapsed is false this return function will be executed, this is the default state, the icons along with the labels will show
     <div
       className={`bg-primary-light z-50 rounded-r-xl text-white absolute sm:relative flex flex-col ring-1 ring-hover sm:ring-0 transition-all duration-300 ease-in-out mt-3 sm:mt-0 sm:pt-3
-        
-        ${iscollapsed ? ` w-16 sm:w-20 gap-5 items-center pb-6` : `w-16 h-fit sm:h-screen sm:w-35 gap-6 sm:gap-10 `}`} 
+        ${iscollapsed ? ` w-16 sm:w-20 gap-5 items-center pb-6 ` : `mt-4 w-10 h-fit sm:h-screen sm:w-35 gap-6 sm:gap-10 `}`} 
       >
         
       {/*top section of the sidebar that constains label, collapse icon, and line*/} 

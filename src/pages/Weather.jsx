@@ -98,11 +98,13 @@ function Weather() {
     <div className="flex flex-row gap-3 px-4 pb-4 items-stretch min-h-screen w-full overflow-y-auto hide-scrollbar"> {/* search bar and side bar are aligned from the top so they start in the same height */}
       <div className="flex flex-col lg:flex-row gap-3 flex-1 min-w-0 items-stretch">
         <div className="flex flex-col gap-5 flex-1 min-w-0 pt-4">
-        <SearchBar 
-          onSearch={handleSearch} //triggers the search logic without having the coords,states, or api
-          input={searchInput} 
-          setInput={setSearchInput} //the input will be changed every key is pressed
-        />
+        <div className="pl-8 sm:pl-0 w-full">
+          <SearchBar 
+            onSearch={handleSearch} //triggers the search logic without having the coords,states, or api
+            input={searchInput} 
+            setInput={setSearchInput} //the input will be changed every key is pressed
+          />
+        </div>
 
         {searchError && (
           <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2.5 rounded-xl text-sm transition-all animate-fadeIn">

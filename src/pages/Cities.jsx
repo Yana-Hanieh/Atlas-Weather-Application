@@ -88,12 +88,14 @@ import CityCard from "../components/CityCard";
           <div className="w-full flex flex-col lg:flex-row justify-between gap-5  mt-3 cursor-pointer max-h-175 rounded-xl overflow-y-auto hide-scrollbar">
             <div className="w-full flex flex-col gap-5">
               <div className="flex flex-col w-full" >
-                <SearchBar 
-                  onSearch={handleSearch} //triggers the search logic without having the coords,states, or api
-                  input={searchCity} 
-                  setInput={setSearchCity} //the input will be changed every key is pressed
-                  placeholder={"Search above to add more cities to this list."}
-                />
+                <div className="pl-8 mt-1 sm:pl-0 w-full">
+                  <SearchBar 
+                    onSearch={handleSearch} //triggers the search logic without having the coords,states, or api
+                    input={searchCity} 
+                    setInput={setSearchCity} //the input will be changed every key is pressed
+                    placeholder={"Search above to add more cities to this list."}
+                  />
+                </div>
               {/* {searchCity.length === 0 && (
                 <p className="text-gray-400 text-sm sm:text-base text-center mt-3"></p>
               )} */}
