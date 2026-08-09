@@ -26,9 +26,9 @@ function SideBar() {
         
       {/*top section of the sidebar that constains label, collapse icon, and line*/} 
       <div> 
-        <div className="flex flex-row gap-5 items-center justify-center h-10"> {/*the label and collapse icon are in a flex row so they are on the same row/x-axis*/ }
+        <div className="flex flex-row gap-5 items-center justify-center h-10 p-2"> {/*the label and collapse icon are in a flex row so they are on the same row/x-axis*/ }
           {!iscollapsed &&(
-            <h2 className="hidden sm:block text-xl ">Clouder</h2>
+            <h2 className="hidden sm:block text-xl ">Atlas Weather</h2>
           )}
          
           {iscollapsed ? (
@@ -39,7 +39,7 @@ function SideBar() {
              ):(
               <GoSidebarExpand 
                 onClick={()=> setIsCollapsed(!iscollapsed)} //onclick function is used to switch the boolean value of iscollapsed, allowing the user to colllapse the sidebar upon clicking
-                className="text-2xl cursor-pointer text-gray-200 hover:text-yellow-100" 
+                className="text-4xl cursor-pointer text-gray-200 hover:text-yellow-100" 
               /> 
             )}
    
