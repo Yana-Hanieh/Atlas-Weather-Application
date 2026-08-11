@@ -32,7 +32,6 @@ function SideBar() {
           )}
          
           {iscollapsed ? (
-          
               <GoSidebarCollapse 
                   onClick={() => setIsCollapsed(!iscollapsed)} //onclick function is used to switch the boolean value of iscollapsed, allowing the user to expand the sidebar upon clicking
                   className="text-3xl mt-5 cursor-pointer flex item-center justify-center text-gray-200 hover:text-yellow-100" />
