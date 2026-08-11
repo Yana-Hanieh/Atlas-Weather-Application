@@ -32,3 +32,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# video recording
+Atlas Weather App Demo.mp4
