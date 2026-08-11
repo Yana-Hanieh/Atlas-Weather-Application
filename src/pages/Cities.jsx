@@ -71,8 +71,6 @@ import CityCard from "../components/CityCard";
           );
           return [...filteredSearchedCities, { ...coords, name: cityName.trim() }];
         }); //adds the newly distinct searched city into the filtered search list
-      
-       
           setSelectedCity(newCity);
         
       } catch (err) { 
